@@ -22,33 +22,31 @@ public class TestController {
 	public String demo() {
 		return "application name : Consid Demo Project";
 	}
+
 	@GetMapping("/test")
-    @Operation(summary = "Get test ", description = "Retrieve demo-test string.")
+	@Operation(summary = "Get test ", description = "Retrieve demo-test string.")
 
 	public String test() {
 		return "application : demo-test";
 	}
-	
-	
-	@GetMapping("/{name}")
-    @Operation(summary = "Retrieves a json", description = "Retrieves a host name and ip and name as input.")
 
-	public ResponseEntity<ResponseOut>  demoWithParameters( @PathVariable(name = "name", required = true ) String name ) {
-		
+	@GetMapping("/{name}")
+	@Operation(summary = "Retrieves a json", description = "Retrieves a host name and ip and name as input.")
+
+	public ResponseEntity<ResponseOut> demoWithParameters(@PathVariable(name = "name", required = true) String name) {
+
 		String hostName = "";
 		String hostIp = "";
-		
+
 		try {
 			hostName = InetAddress.getLocalHost().getHostName();
-			hostIp  = InetAddress.getLocalHost().getHostAddress();
+			hostIp = InetAddress.getLocalHost().getHostAddress();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		
-		return  new ResponseEntity<>( new ResponseOut( hostName, hostIp, name), HttpStatus.OK);
-		
+
+		return new ResponseEntity<>(new ResponseOut(hostName, hostIp, name), HttpStatus.OK);
+
 	}
- 
-	
-	
+
 }
